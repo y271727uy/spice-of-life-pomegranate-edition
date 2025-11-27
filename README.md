@@ -1,29 +1,22 @@
+做什么？怎么做？成品效果？
 
-Installation information
-=======
+惩罚与奖励  
+每当食用一种食物3次（记作X）之后，饱食与饱腹恢复减少50% 
+每当食用X+1次之后就会让食物恢复变为1（记作Y）   
+当食用Y+1次后恢复将变为0（记作Z）  
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+当食用Z+1次将会施加饥饿效果，持续5秒，等级I  
+当食用Z+3次将会施加饥饿，反胃效果，持续10秒，等级II  
+当食用Z+5次将会施加饥饿，反胃，虚弱效果，持续20秒，等级III
+当食用Z+10次将会施加挖掘疲劳，虚弱效果，持续60秒，等级V
+当食用Z+20次将会施加反胃效果，持续60秒，等级V
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+挑食：
+将会根据惩罚部分来进行对tooltip的修改
+“尝起来不错”：0-3次
+“尝起来一般”：4-5次
+“我不想吃这玩意儿了！”：6-9次
+“令人作呕”：超过10次
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
 
-Mapping Names:
-============
-The MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
-
-MDG Legacy:
-==========
-This template uses [ModDevGradle Legacy](https://github.com/neoforged/ModDevGradle). Documentation can be found [here](https://github.com/neoforged/ModDevGradle/blob/main/LEGACY.md).
-
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+参考文献:
