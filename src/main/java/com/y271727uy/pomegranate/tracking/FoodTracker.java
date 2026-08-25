@@ -1,9 +1,10 @@
 package com.y271727uy.pomegranate.tracking;
 
 import com.y271727uy.pomegranate.SOLCarrot;
-import com.y271727uy.pomegranate.SOLCarrotConfig;
 import com.y271727uy.pomegranate.PomegranateConfig;
-import com.y271727uy.pomegranate.PomegranateData;
+import com.y271727uy.pomegranate.PomegranateConfig;
+import com.y271727uy.pomegranate.data.PomegranateData;
+import com.y271727uy.pomegranate.item.foodcontainer.FoodContainerItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleOptions;
@@ -32,9 +33,10 @@ public final class FoodTracker {
 		
 		var isClientSide = player.level().isClientSide;
 		
-		if (SOLCarrotConfig.limitProgressionToSurvival() && player.isCreative()) return;
+		if (PomegranateConfig.limitProgressionToSurvival() && player.isCreative()) return;
 		
 		var usedItem = event.getItem().getItem();
+		if (usedItem instanceof FoodContainerItem) return;
 		if (!usedItem.isEdible()) return;
 		
 		FoodList foodList = FoodList.get(player);
@@ -90,7 +92,7 @@ public final class FoodTracker {
 		}
 
 		if (newMilestoneReached) {
-			if (isClientSide && SOLCarrotConfig.shouldPlayMilestoneSounds()) {
+			if (isClientSide && PomegranateConfig.shouldPlayMilestoneSounds()) {
 				// passing the player makes it not play for some reason
 				player.level().playSound(
 					player,
@@ -100,7 +102,7 @@ public final class FoodTracker {
 				);
 			}
 			
-			if (isClientSide && SOLCarrotConfig.shouldSpawnMilestoneParticles()) {
+			if (isClientSide && PomegranateConfig.shouldSpawnMilestoneParticles()) {
 				spawnParticles(player, ParticleTypes.HEART, 12);
 				
 				if (progressInfo.hasReachedMax()) {
@@ -108,9 +110,9 @@ public final class FoodTracker {
 				}
 			}
 			
-			var heartsDescription = localizedQuantityComponent("message", "hearts", SOLCarrotConfig.getHeartsPerMilestone());
+			var heartsDescription = localizedQuantityComponent("message", "hearts", PomegranateConfig.getHeartsPerMilestone());
 			
-			if (isClientSide && SOLCarrotConfig.shouldShowProgressAboveHotbar()) {
+			if (isClientSide && PomegranateConfig.shouldShowProgressAboveHotbar()) {
 				String messageKey = progressInfo.hasReachedMax() ? "finished.hotbar" : "milestone_achieved";
 				player.displayClientMessage(localizedComponent("message", messageKey, heartsDescription), true);
 			} else {
@@ -120,7 +122,7 @@ public final class FoodTracker {
 				}
 			}
 		} else if (hasTriedNewFood) {
-			if (isClientSide && SOLCarrotConfig.shouldSpawnIntermediateParticles()) {
+			if (isClientSide && PomegranateConfig.shouldSpawnIntermediateParticles()) {
 				spawnParticles(player, ParticleTypes.END_ROD, 12);
 			}
 		}

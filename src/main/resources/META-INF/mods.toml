@@ -4,7 +4,7 @@ loaderVersion = "[${loader_version},)"
 issueTrackerURL = "https://github.com/y271727uy/spice-of-life-pomegranate-edition-fix/issues"
 displayURL = "https://github.com/y271727uy/spice-of-life-pomegranate-edition-fix"
 logoFile = "logo 160.png"
-license = "LGPL-2.1"
+license = "LGPL-3.0-or-later"
 credits = "Lewis_McReu for some coding assistance, Vik for the great new art :)"
 authors = "Cazsius, Talonos, juliand665"
 

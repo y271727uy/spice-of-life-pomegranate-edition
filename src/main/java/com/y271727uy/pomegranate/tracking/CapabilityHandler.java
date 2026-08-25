@@ -1,7 +1,7 @@
 package com.y271727uy.pomegranate.tracking;
 
 import com.y271727uy.pomegranate.SOLCarrot;
-import com.y271727uy.pomegranate.SOLCarrotConfig;
+import com.y271727uy.pomegranate.PomegranateConfig;
 import com.y271727uy.pomegranate.api.FoodCapability;
 import com.y271727uy.pomegranate.communication.FoodListMessage;
 import net.minecraft.resources.ResourceLocation;
@@ -49,7 +49,7 @@ public final class CapabilityHandler {
 	
 	@SubscribeEvent
 	public static void onClone(PlayerEvent.Clone event) {
-		if (event.isWasDeath() && SOLCarrotConfig.shouldResetOnDeath()) return;
+		if (event.isWasDeath() && PomegranateConfig.shouldResetOnDeath()) return;
 		
 		var originalPlayer = event.getOriginal();
 		originalPlayer.reviveCaps(); // so we can access the capabilities; entity will get removed either way

@@ -1,6 +1,6 @@
 package com.y271727uy.pomegranate.tracking;
 
-import com.y271727uy.pomegranate.SOLCarrotConfig;
+import com.y271727uy.pomegranate.PomegranateConfig;
 import com.y271727uy.pomegranate.api.FoodCapability;
 import com.y271727uy.pomegranate.api.SOLCarrotAPI;
 import net.minecraft.core.Direction;
@@ -76,7 +76,7 @@ public final class FoodList implements FoodCapability {
 	
 	/** @return true if the food was not previously known, i.e. if a new food has been tried */
 	public boolean addFood(Item food) {
-		boolean wasAdded = foods.add(new FoodInstance(food)) && SOLCarrotConfig.shouldCount(food);
+		boolean wasAdded = foods.add(new FoodInstance(food)) && PomegranateConfig.shouldCount(food);
 		invalidateProgressInfo();
 		return wasAdded;
 	}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [" A ", "ABA", "AAA"],
+  "key": {
+    "A": { "item": "minecraft:iron_ingot" },
+    "B": { "item": "spice_of_life_pomegranate_edition:lunchbag" }
+  },
+  "result": { "item": "spice_of_life_pomegranate_edition:lunchbox" }
+}

@@ -72,5 +72,14 @@
 	"spice_of_life_pomegranate_edition.config.food_whitelist": "Whitelist (disables blacklist)",
 	"spice_of_life_pomegranate_edition.config.minimum_food_value": "Minimum Food Value",
 	"spice_of_life_pomegranate_edition.config.reset_on_death": "Reset on Death",
-	"item.spice_of_life_pomegranate_edition.food_book": "Food Book"
+	"item.spice_of_life_pomegranate_edition.food_book": "Food Book",
+	"spice_of_life_pomegranate_edition.config.pomegranate.enable_eating_when_full": "Enable Eating When Full",
+	"spice_of_life_pomegranate_edition.config.pomegranate.full_hunger_mode": "Eating When Full Mode",
+	"spice_of_life_pomegranate_edition.config.pomegranate.full_hunger_item_list": "Eating When Full Item List",
+	"spice_of_life_pomegranate_edition.config.pomegranate.uneatable_when_full_items": "Uneatable When Full",
+	"item.spice_of_life_pomegranate_edition.lunchbag": "Lunchbag",
+	"item.spice_of_life_pomegranate_edition.lunchbox": "Lunchbox",
+	"spice_of_life_pomegranate_edition.gui.food_container.lunchbag": "Lunchbag",
+	"spice_of_life_pomegranate_edition.gui.food_container.lunchbox": "Lunchbox",
+	"spice_of_life_pomegranate_edition.tooltip.food_container.show_contents": "Hold [Shift] to view contents"
 }

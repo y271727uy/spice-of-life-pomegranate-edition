@@ -73,5 +73,6 @@
 	"spice_of_life_pomegranate_edition.config.food_blacklist": "Svarteliste",
 	"spice_of_life_pomegranate_edition.config.food_whitelist": "Hviteliste (slår av svarteliste)",
 	"spice_of_life_pomegranate_edition.config.minimum_food_value": "Minimum næringsverdi",
-	"spice_of_life_pomegranate_edition.config.reset_on_death": "Nullstill ved dødsfall"
+	"spice_of_life_pomegranate_edition.config.reset_on_death": "Nullstill ved dødsfall",
+	"spice_of_life_pomegranate_edition.tooltip.food_container.show_contents": "Hold [Shift] inne for å vise innholdet"
 }

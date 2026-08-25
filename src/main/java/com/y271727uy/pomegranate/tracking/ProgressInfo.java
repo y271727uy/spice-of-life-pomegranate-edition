@@ -1,6 +1,6 @@
 package com.y271727uy.pomegranate.tracking;
 
-import com.y271727uy.pomegranate.SOLCarrotConfig;
+import com.y271727uy.pomegranate.PomegranateConfig;
 
 /** contains all relevant variables for current progress */
 public final class ProgressInfo {
@@ -9,17 +9,17 @@ public final class ProgressInfo {
 	
 	ProgressInfo(FoodList foodList) {
 		foodsEaten = (int) foodList.getEatenFoods().stream()
-			.filter(food -> SOLCarrotConfig.shouldCount(food.item))
+			.filter(food -> PomegranateConfig.shouldCount(food.item))
 			.count();
 	}
 	
 	public boolean hasReachedMax() {
-		return foodsEaten >= SOLCarrotConfig.highestMilestone();
+		return foodsEaten >= PomegranateConfig.highestMilestone();
 	}
 	
 	/** the next milestone to reach, or a negative value if the maximum has been reached */
 	public int nextMilestone() {
-		return hasReachedMax() ? -1 : SOLCarrotConfig.milestone(milestonesAchieved());
+		return hasReachedMax() ? -1 : PomegranateConfig.milestone(milestonesAchieved());
 	}
 	
 	/** the number of foods remaining until the next milestone, or a negative value if the maximum has been reached */
@@ -29,7 +29,7 @@ public final class ProgressInfo {
 	
 	/** the number of milestones achieved, doubling as the index of the next milestone */
 	public int milestonesAchieved() {
-		return (int) SOLCarrotConfig.getMilestones().stream()
+		return (int) PomegranateConfig.getMilestones().stream()
 			.filter(milestone -> foodsEaten >= milestone).count();
 	}
 }

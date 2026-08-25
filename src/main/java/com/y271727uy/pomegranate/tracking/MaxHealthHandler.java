@@ -1,7 +1,7 @@
 package com.y271727uy.pomegranate.tracking;
 
 import com.y271727uy.pomegranate.SOLCarrot;
-import com.y271727uy.pomegranate.SOLCarrotConfig;
+import com.y271727uy.pomegranate.PomegranateConfig;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -37,11 +37,11 @@ public final class MaxHealthHandler {
 	public static boolean updateFoodHPModifier(Player player) {
 		var prevModifier = getHealthModifier(player);
 		
-		int healthPenalty = 2 * (SOLCarrotConfig.getBaseHearts() - 10);
+		int healthPenalty = 2 * (PomegranateConfig.getBaseHearts() - 10);
 		
 		ProgressInfo progressInfo = FoodList.get(player).getProgressInfo();
 		int milestonesAchieved = progressInfo.milestonesAchieved();
-		int addedHealthFromFood = milestonesAchieved * 2 * SOLCarrotConfig.getHeartsPerMilestone();
+		int addedHealthFromFood = milestonesAchieved * 2 * PomegranateConfig.getHeartsPerMilestone();
 		
 		double totalHealthModifier = healthPenalty + addedHealthFromFood;
 		boolean hasChanged = prevModifier == null || prevModifier.getAmount() != totalHealthModifier;

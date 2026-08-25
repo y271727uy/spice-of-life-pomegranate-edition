@@ -1,5 +1,6 @@
 package com.y271727uy.pomegranate;
 
+import com.y271727uy.pomegranate.data.PomegranateData;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;

@@ -1,6 +1,6 @@
 package com.y271727uy.pomegranate.client.gui;
 
-import com.y271727uy.pomegranate.SOLCarrotConfig;
+import com.y271727uy.pomegranate.PomegranateConfig;
 import com.y271727uy.pomegranate.client.gui.elements.UIBox;
 import com.y271727uy.pomegranate.tracking.ProgressInfo;
 
@@ -21,7 +21,7 @@ final class StatListPage extends Page {
 		mainStack.addChild(makeSeparatorLine());
 		
 		String foodsTasted;
-		if (SOLCarrotConfig.shouldShowUneatenFoods()) {
+		if (PomegranateConfig.shouldShowUneatenFoods()) {
 			foodsTasted = fraction(progressInfo.foodsEaten, foodData.validFoods.size());
 		} else {
 			foodsTasted = "" + progressInfo.foodsEaten;
@@ -35,10 +35,10 @@ final class StatListPage extends Page {
 		
 		mainStack.addChild(makeSeparatorLine());
 		
-		int heartsPerMilestone = SOLCarrotConfig.getHeartsPerMilestone();
+		int heartsPerMilestone = PomegranateConfig.getHeartsPerMilestone();
 		String heartsGained = fraction(
 			heartsPerMilestone * progressInfo.milestonesAchieved(),
-			heartsPerMilestone * SOLCarrotConfig.getMilestoneCount()
+			heartsPerMilestone * PomegranateConfig.getMilestoneCount()
 		);
 		
 		mainStack.addChild(statWithIcon(

@@ -2,7 +2,7 @@ package com.y271727uy.pomegranate.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.y271727uy.pomegranate.SOLCarrot;
-import com.y271727uy.pomegranate.SOLCarrotConfig;
+import com.y271727uy.pomegranate.PomegranateConfig;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -60,7 +60,7 @@ public final class SingleRowHeartOverlayHandler {
 
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void onRenderHealth(RenderGuiOverlayEvent.Pre event) {
-		if (HAS_MANTLE || !SOLCarrotConfig.isSingleRowHeartOverlayEnabled() || event.isCanceled() || event.getOverlay() != VanillaGuiOverlay.PLAYER_HEALTH.type()) {
+		if (HAS_MANTLE || !PomegranateConfig.isSingleRowHeartOverlayEnabled() || event.isCanceled() || event.getOverlay() != VanillaGuiOverlay.PLAYER_HEALTH.type()) {
 			return;
 		}
 		if (!(MC.gui instanceof ForgeGui gui) || MC.options.hideGui || !gui.shouldDrawSurvivalElements()) {

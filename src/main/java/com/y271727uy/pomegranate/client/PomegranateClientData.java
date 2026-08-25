@@ -1,10 +1,11 @@
 package com.y271727uy.pomegranate.client;
 
-import com.y271727uy.pomegranate.PomegranateData;
+import com.y271727uy.pomegranate.data.PomegranateData;
 import com.y271727uy.pomegranate.PomegranateConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +20,10 @@ public final class PomegranateClientData {
 	private static int maxShortFoodHistorySize = 5;
 	private static double shortFoodDecayModifier = 0.0;
 	private static List<Double> foodDecayModifiers = new ArrayList<>();
+	private static boolean eatingWhenFullEnabled = true;
+	private static String fullHungerMode = "BLACKLIST";
+	private static List<String> fullHungerItemList = new ArrayList<>();
+	private static List<String> uneatableWhenFullItems = new ArrayList<>();
 	
 	public static int getFoodCount(Item item) {
 		// Prefer client-side cache populated by server sync
@@ -78,6 +83,29 @@ public final class PomegranateClientData {
 	public static void setFoodCount(Item item, int count) {
 		clientFoodCounts.put(item, count);
 	}
+
+	public static void setEatingWhenFullSettings(boolean enabled, String mode, List<String> itemList, List<String> uneatableItems) {
+		eatingWhenFullEnabled = enabled;
+		fullHungerMode = mode;
+		fullHungerItemList = new ArrayList<>(itemList);
+		uneatableWhenFullItems = new ArrayList<>(uneatableItems);
+	}
+
+	public static boolean canEatWhenFull(Item item) {
+		if (!eatingWhenFullEnabled) return false;
+		var key = ForgeRegistries.ITEMS.getKey(item);
+		if (key == null) return false;
+		String id = key.toString();
+		if (uneatableWhenFullItems.contains(id)) return false;
+		return "BLACKLIST".equals(fullHungerMode)
+			? !fullHungerItemList.contains(id)
+			: fullHungerItemList.contains(id);
+	}
+
+	public static boolean isUneatableWhenFull(Item item) {
+		var key = ForgeRegistries.ITEMS.getKey(item);
+		return key != null && uneatableWhenFullItems.contains(key.toString());
+	}
 	
 	public static void clear() {
 		clientFoodCounts.clear();
@@ -86,6 +114,10 @@ public final class PomegranateClientData {
 		shortFoodDecayModifier = 0.0;
 		maxFoodHistorySize = 100;
 		maxShortFoodHistorySize = 5;
+		eatingWhenFullEnabled = true;
+		fullHungerMode = "BLACKLIST";
+		fullHungerItemList = new ArrayList<>();
+		uneatableWhenFullItems = new ArrayList<>();
 	}
 	
 	private PomegranateClientData() {}

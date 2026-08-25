@@ -1,7 +1,7 @@
 package com.y271727uy.pomegranate.client.gui;
 
 import com.y271727uy.pomegranate.SOLCarrot;
-import com.y271727uy.pomegranate.SOLCarrotConfig;
+import com.y271727uy.pomegranate.PomegranateConfig;
 import com.y271727uy.pomegranate.client.gui.elements.ImageData;
 import com.y271727uy.pomegranate.client.gui.elements.UIElement;
 import com.y271727uy.pomegranate.client.gui.elements.UIImage;
@@ -128,7 +128,7 @@ public final class FoodBookScreen extends Screen implements PageFlipButton.Pagea
 		
 		addPages("eaten_foods", foodData.eatenFoods);
 		
-		if (SOLCarrotConfig.shouldShowUneatenFoods()) {
+		if (PomegranateConfig.shouldShowUneatenFoods()) {
 			addPages("uneaten_foods", foodData.uneatenFoods);
 		}
 	}

@@ -1,6 +1,6 @@
 package com.y271727uy.pomegranate.communication;
 
-import com.y271727uy.pomegranate.PomegranateData;
+import com.y271727uy.pomegranate.data.PomegranateData;
 import com.y271727uy.pomegranate.SOLCarrot;
 import com.y271727uy.pomegranate.client.PomegranateClientData;
 import net.minecraft.client.Minecraft;
@@ -79,9 +79,24 @@ public final class PomegranateDataMessage {
                 if (!decay.isEmpty()) {
                     PomegranateClientData.setClassicConfig(maxHistory, maxShortHistory, shortDecay, decay);
                 }
+
+                PomegranateClientData.setEatingWhenFullSettings(
+                    message.tag.getBoolean("EatingWhenFullEnabled"),
+                    message.tag.getString("FullHungerMode"),
+                    strings(message.tag.getList("FullHungerItemList", Tag.TAG_STRING)),
+                    strings(message.tag.getList("UneatableWhenFullItems", Tag.TAG_STRING))
+                );
                 SOLCarrot.LOGGER.debug("PomegranateDataMessage received on client: populated {} food counts", populated);
             });
             context.get().setPacketHandled(true);
+        }
+
+        private static java.util.List<String> strings(net.minecraft.nbt.ListTag tag) {
+            java.util.List<String> values = new java.util.ArrayList<>();
+            for (int i = 0; i < tag.size(); i++) {
+                values.add(tag.getString(i));
+            }
+            return values;
         }
     }
 }

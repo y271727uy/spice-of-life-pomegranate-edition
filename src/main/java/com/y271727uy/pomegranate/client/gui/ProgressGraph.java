@@ -1,6 +1,6 @@
 package com.y271727uy.pomegranate.client.gui;
 
-import com.y271727uy.pomegranate.SOLCarrotConfig;
+import com.y271727uy.pomegranate.PomegranateConfig;
 import com.y271727uy.pomegranate.client.gui.elements.*;
 import com.y271727uy.pomegranate.tracking.ProgressInfo;
 
@@ -23,7 +23,7 @@ final class ProgressGraph extends UIElement {
 		int padding = 4;
 		
 		int milestonesAchieved = progressInfo.milestonesAchieved();
-		int previousMilestone = milestonesAchieved > 0 ? SOLCarrotConfig.milestone(milestonesAchieved - 1) : 0;
+		int previousMilestone = milestonesAchieved > 0 ? PomegranateConfig.milestone(milestonesAchieved - 1) : 0;
 		int nextMilestone = progressInfo.nextMilestone();
 		boolean hasReachedMax = progressInfo.hasReachedMax();
 		boolean hasSurpassedMax = hasReachedMax && progressInfo.foodsEaten > previousMilestone;
@@ -86,7 +86,7 @@ final class ProgressGraph extends UIElement {
 			children.add(UIBox.horizontalLine(progressX + 1, rightPoint, lineY, hasReachedMax ? FoodBookScreen.leastBlack : FoodBookScreen.lessBlack));
 		}
 		
-		boolean isLastMilestoneVisible = milestonesAchieved + 1 >= SOLCarrotConfig.getMilestoneCount();
+		boolean isLastMilestoneVisible = milestonesAchieved + 1 >= PomegranateConfig.getMilestoneCount();
 		// if the last milestone is visible, there are no more milestones beyond the right edge, so the line is fainter.
 		children.add(UIBox.horizontalLine(rightPoint + 1, rightEdge, lineY, isLastMilestoneVisible ? FoodBookScreen.leastBlack : FoodBookScreen.lessBlack));
 		
@@ -106,7 +106,7 @@ final class ProgressGraph extends UIElement {
 	private void addHeartsView(int centerX, int maxY, boolean isOpaque) {
 		UIStack heartsView = new UIStack();
 		
-		int heartCount = SOLCarrotConfig.getHeartsPerMilestone();
+		int heartCount = PomegranateConfig.getHeartsPerMilestone();
 		
 		heartsView.tooltip = localizedQuantity("gui", "food_book.stats.tooltip.hearts_per_milestone", heartCount);
 		

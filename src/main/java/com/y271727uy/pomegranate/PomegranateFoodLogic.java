@@ -2,6 +2,7 @@ package com.y271727uy.pomegranate;
 
 import com.y271727uy.pomegranate.client.PomegranateClientData;
 import com.y271727uy.pomegranate.communication.PomegranateDataMessage;
+import com.y271727uy.pomegranate.data.PomegranateData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -49,68 +50,64 @@ public final class PomegranateFoodLogic {
         // Overweight/staple/produce bookkeeping using TagKey checks
         for (TagKey<Item> key : PomegranateConfig.getStapleTagKeys()) {
             if (stack.is(key)) {
-                com.y271727uy.pomegranate.PomegranateData.incrementStapleCount(player);
+                PomegranateData.incrementStapleCount(player);
                 break;
             }
         }
         for (TagKey<Item> key : PomegranateConfig.getProduceTagKeys()) {
             if (stack.is(key)) {
-                com.y271727uy.pomegranate.PomegranateData.incrementProduceCount(player);
+                PomegranateData.incrementProduceCount(player);
                 break;
             }
         }
 
         // If overweight conditions met, apply HUNGER
         if (PomegranateConfig.enableOverweight()) {
-            int stapleCount = com.y271727uy.pomegranate.PomegranateData.getStapleCount(player);
+            int stapleCount = PomegranateData.getStapleCount(player);
             Level level = player.level();
             if (stapleCount >= PomegranateConfig.getOverweightStapleThreshold() && level != null && !level.isClientSide()) {
                 player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 20 * 6, 0));
             }
-            int produceCount = com.y271727uy.pomegranate.PomegranateData.getProduceCount(player);
+            int produceCount = PomegranateData.getProduceCount(player);
             if (produceCount >= PomegranateConfig.getOverweightProduceResetThreshold()) {
-                com.y271727uy.pomegranate.PomegranateData.resetOverweight(player);
+                PomegranateData.resetOverweight(player);
             }
         }
 
-        // --- Classic-style punishment tiers (from README)
-        // Interpret: X=6, Y=7, Z=8. Apply stepwise overrides and potion effects for high counts.
-        int X = 6;
-        int Y = X + 1; // 7
-        int Z = Y + 1; // 8
-
-        // Apply nutrition/saturation overrides first
-        if (totalCount >= Z) {
-            // count >= 8 -> restore becomes 0
+        // Repeated-food punishment tiers. The two reduction tiers use the food's
+        // original values, rather than compounding the short-history decay.
+        if (totalCount >= 14) {
+            // count >= 14 -> restore becomes 0
             customNutrition = 0;
             customSaturation = 0f;
-        } else if (totalCount >= Y) {
-            // count == 7 -> restore becomes 1
-            customNutrition = 1;
-            // keep saturation minimal
-            customSaturation = Math.min(customSaturation, 0.01f);
-        } else if (totalCount >= X) {
-            // count == 6 -> reduce both nutrition and saturation by 50%
-            customNutrition = Math.max(0, (int) Math.floor(customNutrition * 0.5));
-            customSaturation = customSaturation * 0.5f;
+        } else if (totalCount >= 11) {
+            // counts 11-13 -> halve the prior tier: 25% of the original values
+            FoodProperties food = stack.getItem().getFoodProperties(stack, player);
+            customNutrition = food == null ? 0 : (int) Math.floor(food.getNutrition() * 0.25);
+            customSaturation = food == null ? 0f : food.getSaturationModifier() * 0.25f;
+        } else if (totalCount >= 8) {
+            // counts 8-10 -> 50% of the original values
+            FoodProperties food = stack.getItem().getFoodProperties(stack, player);
+            customNutrition = food == null ? 0 : (int) Math.floor(food.getNutrition() * 0.5);
+            customSaturation = food == null ? 0f : food.getSaturationModifier() * 0.5f;
         }
 
-        // Apply punitive status effects for counts beyond Z
+        // Apply punitive status effects after nutrition has reached zero.
         if (!player.level().isClientSide()) {
             // check highest tiers first
-            if (totalCount >= Z + 20) { // Z+20: nausea 60s level V
+            if (totalCount >= 33) { // nausea 60s level V
                 player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 60 * 20, 4));
-            } else if (totalCount >= Z + 10) { // Z+10: mining fatigue + weakness 60s level V
+            } else if (totalCount >= 23) { // mining fatigue + weakness 60s level V
                 player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 60 * 20, 4));
                 player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 60 * 20, 4));
-            } else if (totalCount >= Z + 5) { // Z+5: hunger, nausea, weakness 20s level III
+            } else if (totalCount >= 18) { // hunger, nausea, weakness 20s level III
                 player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 20 * 20, 2));
                 player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 20 * 20, 2));
                 player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20 * 20, 2));
-            } else if (totalCount >= Z + 3) { // Z+3: hunger + nausea 10s level II
+            } else if (totalCount >= 16) { // hunger + nausea 10s level II
                 player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 10 * 20, 1));
                 player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 10 * 20, 1));
-            } else if (totalCount >= Z + 1) { // Z+1: hunger 5s level I
+            } else if (totalCount >= 14) { // hunger 5s level I
                 player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 5 * 20, 0));
             }
         }
@@ -173,20 +170,16 @@ public final class PomegranateFoodLogic {
         int customNutrition = Math.max(1, (int) (food.getNutrition() * modifier));
         float customSaturation = Math.max(0.01f, food.getSaturationModifier());
 
-        // classic punishment tiers (X=6, Y=7, Z=8)
-        int X = 6;
-        int Y = X + 1;
-        int Z = Y + 1;
-
-        if (totalAfterEat >= Z) {
+        // Keep client-side previews aligned with the server's repeated-food tiers.
+        if (totalAfterEat >= 14) {
             customNutrition = 0;
             customSaturation = 0f;
-        } else if (totalAfterEat >= Y) {
-            customNutrition = 1;
-            customSaturation = Math.min(customSaturation, 0.01f);
-        } else if (totalAfterEat >= X) {
-            customNutrition = Math.max(0, (int) Math.floor(customNutrition * 0.5));
-            customSaturation = customSaturation * 0.5f;
+        } else if (totalAfterEat >= 11) {
+            customNutrition = (int) Math.floor(food.getNutrition() * 0.25);
+            customSaturation = food.getSaturationModifier() * 0.25f;
+        } else if (totalAfterEat >= 8) {
+            customNutrition = (int) Math.floor(food.getNutrition() * 0.5);
+            customSaturation = food.getSaturationModifier() * 0.5f;
         }
 
         return new CustomFoodData(customNutrition, customSaturation);

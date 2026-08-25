@@ -73,5 +73,6 @@
 	"spice_of_life_pomegranate_edition.config.food_blacklist": "Blacklist",
 	"spice_of_life_pomegranate_edition.config.food_whitelist": "Whitelist (deaktiviert Blacklist)",
 	"spice_of_life_pomegranate_edition.config.minimum_food_value": "Mindestwert für Lebensmittel",
-	"spice_of_life_pomegranate_edition.config.reset_on_death": "Nach dem Tod zurücksetzen"
+	"spice_of_life_pomegranate_edition.config.reset_on_death": "Nach dem Tod zurücksetzen",
+	"spice_of_life_pomegranate_edition.tooltip.food_container.show_contents": "Halte [Umschalt] gedrückt, um den Inhalt anzuzeigen"
 }

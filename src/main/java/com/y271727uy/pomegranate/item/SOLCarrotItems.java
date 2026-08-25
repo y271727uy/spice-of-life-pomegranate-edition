@@ -1,6 +1,7 @@
 package com.y271727uy.pomegranate.item;
 
 import com.y271727uy.pomegranate.SOLCarrot;
+import com.y271727uy.pomegranate.item.foodcontainer.FoodContainerItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -20,6 +21,8 @@ public final class SOLCarrotItems {
 	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SOLCarrot.MOD_ID);
 	
 	public static final RegistryObject<Item> FOOD_BOOK = ITEMS.register("food_book", FoodBookItem::new);
+	public static final RegistryObject<Item> LUNCHBAG = ITEMS.register("lunchbag", () -> new FoodContainerItem(5, "lunchbag"));
+	public static final RegistryObject<Item> LUNCHBOX = ITEMS.register("lunchbox", () -> new FoodContainerItem(9, "lunchbox"));
 	
 	public static void setUp() {
 		var eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -30,6 +33,8 @@ public final class SOLCarrotItems {
 	public static void buildCreativeTabs(BuildCreativeModeTabContentsEvent event) {
 		if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
 			event.accept(FOOD_BOOK);
+			event.accept(LUNCHBAG);
+			event.accept(LUNCHBOX);
 		}
 	}
 }

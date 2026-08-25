@@ -1,7 +1,7 @@
 package com.y271727uy.pomegranate.client;
 
 import com.y271727uy.pomegranate.SOLCarrot;
-import com.y271727uy.pomegranate.SOLCarrotConfig;
+import com.y271727uy.pomegranate.PomegranateConfig;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
@@ -63,7 +63,7 @@ public final class FoodItems {
 		if (!isConfigLoaded) return;
 		
 		foods = foodsBeforeBlacklist.stream()
-			.filter(SOLCarrotConfig::isAllowed)
+			.filter(PomegranateConfig::isAllowed)
 			.collect(Collectors.toList());
 	}
 }

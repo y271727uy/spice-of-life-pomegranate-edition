@@ -11,9 +11,6 @@
 	"spice_of_life_pomegranate_edition.tooltip.pomegranate.picky.10_12": "我不想吃这玩意儿了！",
 	"spice_of_life_pomegranate_edition.tooltip.pomegranate.picky.13_plus": "令人作呕",
 
-	"spice_of_life_pomegranate_edition.command.foodlist.size.usage": "/foodlist size [player]",
-	"spice_of_life_pomegranate_edition.command.foodlist.clear.usage": "/foodlist clear [player]",
-	"spice_of_life_pomegranate_edition.command.foodlist.sync.usage": "/foodlist sync [player]",
 	"spice_of_life_pomegranate_edition.command.foodlist.no_permissions": "您没有将此命令应用于其他玩家的权限!",
 
 	"spice_of_life_pomegranate_edition.command.foodlist.size.desc.foods_eaten.singular": "您已经品尝了1种独特的食物!",
@@ -32,7 +29,6 @@
 	"spice_of_life_pomegranate_edition.message.finished.chat": "您追寻独特食物的愿望终于得到满足.",
 	"spice_of_life_pomegranate_edition.message.finished.hotbar": "您已经获得了%s. 您追寻独特食物的愿望终于得到满足.",
 
-	"spice_of_life_pomegranate_edition.item.food_book": "食物清单",
 
 	"spice_of_life_pomegranate_edition.gui.food_book.stats": "概要",
 	"spice_of_life_pomegranate_edition.gui.food_book.eaten_foods": "已食用: %s",
@@ -83,7 +79,16 @@
 	"spice_of_life_pomegranate_edition.config.pomegranate.enable_punishments": "启用惩罚机制",
 	"spice_of_life_pomegranate_edition.config.pomegranate.enable_rewards": "启用奖励机制",
 	"spice_of_life_pomegranate_edition.config.pomegranate.enable_overweight": "启用超重机制",
+	"spice_of_life_pomegranate_edition.config.pomegranate.enable_eating_when_full": "启用满食可食用",
+	"spice_of_life_pomegranate_edition.config.pomegranate.full_hunger_mode": "满食可食用模式",
+	"spice_of_life_pomegranate_edition.config.pomegranate.full_hunger_item_list": "满食可食用物品列表",
+	"spice_of_life_pomegranate_edition.config.pomegranate.uneatable_when_full_items": "满食时禁止食用的物品",
 	"spice_of_life_pomegranate_edition.config.pomegranate.staple_tags": "主食标签",
 	"spice_of_life_pomegranate_edition.config.pomegranate.produce_tags": "蔬果标签",
-	"item.spice_of_life_pomegranate_edition.food_book": "食物之书"
+	"item.spice_of_life_pomegranate_edition.food_book": "膳食宝典：石榴版",
+	"item.spice_of_life_pomegranate_edition.lunchbag": "午餐袋",
+	"item.spice_of_life_pomegranate_edition.lunchbox": "午餐盒",
+	"spice_of_life_pomegranate_edition.gui.food_container.lunchbag": "午餐袋",
+	"spice_of_life_pomegranate_edition.gui.food_container.lunchbox": "午餐盒",
+	"spice_of_life_pomegranate_edition.tooltip.food_container.show_contents": "按住 [Shift] 显示内容物"
 }

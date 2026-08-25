@@ -4,6 +4,7 @@ import com.y271727uy.pomegranate.communication.FoodListMessage;
 import com.y271727uy.pomegranate.communication.PomegranateDataMessage;
 import com.y271727uy.pomegranate.integration.appleskin.AppleSkinIntegration;
 import com.y271727uy.pomegranate.item.SOLCarrotItems;
+import com.y271727uy.pomegranate.item.foodcontainer.FoodContainerMenus;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -52,9 +53,9 @@ public final class SOLCarrot {
 	}
 	
 	public SOLCarrot() {
-		SOLCarrotConfig.setUp();
 		PomegranateConfig.setUp();
 		SOLCarrotItems.setUp();
+		FoodContainerMenus.setUp(net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus());
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
 			if (ModList.get().isLoaded("appleskin")) {

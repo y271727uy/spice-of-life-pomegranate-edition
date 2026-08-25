@@ -73,5 +73,6 @@
 	"spice_of_life_pomegranate_edition.config.food_blacklist": "Чёрный список",
 	"spice_of_life_pomegranate_edition.config.food_whitelist": "Белый список (отключает чёрный список)",
 	"spice_of_life_pomegranate_edition.config.minimum_food_value": "Мин. питательность",
-	"spice_of_life_pomegranate_edition.config.reset_on_death": "Сбросить при смерти"
+	"spice_of_life_pomegranate_edition.config.reset_on_death": "Сбросить при смерти",
+	"spice_of_life_pomegranate_edition.tooltip.food_container.show_contents": "Удерживайте [Shift], чтобы увидеть содержимое"
 }

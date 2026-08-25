@@ -73,5 +73,6 @@
 	"spice_of_life_pomegranate_edition.config.food_blacklist": "블랙리스트",
 	"spice_of_life_pomegranate_edition.config.food_whitelist": "화이트리스트 (블랙리스트를 비활성화함)",
 	"spice_of_life_pomegranate_edition.config.minimum_food_value": "최소 배고픔 제공 수치",
-	"spice_of_life_pomegranate_edition.config.reset_on_death": "죽으면 초기화"
+	"spice_of_life_pomegranate_edition.config.reset_on_death": "죽으면 초기화",
+	"spice_of_life_pomegranate_edition.tooltip.food_container.show_contents": "[Shift]를 누르면 내용물 표시"
 }

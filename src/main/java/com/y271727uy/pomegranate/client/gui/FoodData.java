@@ -1,6 +1,6 @@
 package com.y271727uy.pomegranate.client.gui;
 
-import com.y271727uy.pomegranate.SOLCarrotConfig;
+import com.y271727uy.pomegranate.PomegranateConfig;
 import com.y271727uy.pomegranate.client.FoodItems;
 import com.y271727uy.pomegranate.tracking.FoodList;
 import com.y271727uy.pomegranate.tracking.ProgressInfo;
@@ -25,7 +25,7 @@ final class FoodData {
 		this.foodList = foodList;
 		this.progressInfo = foodList.getProgressInfo();
 		this.validFoods = FoodItems.getAllFoods().stream()
-			.filter(SOLCarrotConfig::isHearty)
+			.filter(PomegranateConfig::isHearty)
 			.collect(Collectors.toList());
 		this.eatenFoods = new ArrayList<>();
 		this.uneatenFoods = new ArrayList<>();

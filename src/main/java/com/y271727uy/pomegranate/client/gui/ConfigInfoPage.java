@@ -1,6 +1,6 @@
 package com.y271727uy.pomegranate.client.gui;
 
-import com.y271727uy.pomegranate.SOLCarrotConfig;
+import com.y271727uy.pomegranate.PomegranateConfig;
 import com.y271727uy.pomegranate.client.FoodItems;
 import com.y271727uy.pomegranate.client.gui.elements.ImageData;
 import com.y271727uy.pomegranate.client.gui.elements.UIElement;
@@ -19,11 +19,11 @@ final class ConfigInfoPage extends Page {
 		int cheapFoods = totalFoods - validFoods;
 		int eatenCheapFoods = (int) foodData.foodList.getEatenFoods().stream()
 			.map(FoodInstance::getItem)
-			.filter(food -> SOLCarrotConfig.isAllowed(food) && !SOLCarrotConfig.isHearty(food))
+			.filter(food -> PomegranateConfig.isAllowed(food) && !PomegranateConfig.isHearty(food))
 			.count();
 		
 		{
-			int minValue = SOLCarrotConfig.getMinimumFoodValue();
+			int minValue = PomegranateConfig.getMinimumFoodValue();
 			String minValueDesc = "" + (minValue / 2);
 			if (minValue % 2 == 1) {
 				minValueDesc += ".5";
@@ -51,7 +51,7 @@ final class ConfigInfoPage extends Page {
 		mainStack.addChild(makeSeparatorLine());
 		
 		{
-			boolean hasWhitelist = SOLCarrotConfig.hasWhitelist();
+			boolean hasWhitelist = PomegranateConfig.hasWhitelist();
 			String listKey = hasWhitelist ? "whitelist" : "blacklist";
 			
 			ImageData listIcon = hasWhitelist ? FoodBookScreen.whitelistImage : FoodBookScreen.blacklistImage;
